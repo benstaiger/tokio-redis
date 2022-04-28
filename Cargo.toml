@@ -7,3 +7,7 @@ edition = "2021"
 bytes = "1"
 tokio = { version = "1", features = ["full"] }
 mini-redis = "0.4"
+
+[lib]
+name = "tokio_redis"
+path = "src/lib.rs"
