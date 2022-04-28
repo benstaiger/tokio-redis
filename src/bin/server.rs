@@ -2,8 +2,8 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
 use bytes::Bytes;
-use mini_redis::Frame;
 use mini_redis::Command::{self, Get, Set};
+use mini_redis::Frame;
 use tokio::net::{TcpListener, TcpStream};
 
 use tokio_redis::connection::Connection;
@@ -45,8 +45,8 @@ async fn main() {
 
     loop {
         let (socket, _) = listener.accept().await.unwrap();
-        let db = db.clone();  // Clone the Arc<Mut<Hash>>
-        
+        let db = db.clone(); // Clone the Arc<Mut<Hash>>
+
         println!("Accepted.");
         tokio::spawn(async move {
             process(socket, db).await;

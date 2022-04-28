@@ -1,9 +1,9 @@
 use std::io::Cursor;
 
-use bytes::buf::Buf;  // Buf::advance
+use bytes::buf::Buf; // Buf::advance
 use bytes::BytesMut;
-use mini_redis::{Frame, Result};
 use mini_redis::frame::Error::Incomplete;
+use mini_redis::{Frame, Result};
 use tokio::io::{AsyncReadExt, AsyncWriteExt, BufWriter};
 use tokio::net::TcpStream;
 
@@ -11,7 +11,6 @@ pub struct Connection {
     stream: BufWriter<TcpStream>,
     buffer: BytesMut,
 }
-
 
 impl Connection {
     pub fn new(stream: TcpStream) -> Connection {
@@ -28,7 +27,7 @@ impl Connection {
                 return Ok(Some(frame));
             }
 
-            if self.stream.read_buf(&mut self.buffer).await? == 0{
+            if self.stream.read_buf(&mut self.buffer).await? == 0 {
                 if self.buffer.is_empty() {
                     return Ok(None);
                 } else {
@@ -92,7 +91,7 @@ impl Connection {
             Err(e) => Err(e.into()),
         }
     }
-    
+
     async fn write_decimal(&mut self, val: u64) -> Result<()> {
         use std::io::Write;
 

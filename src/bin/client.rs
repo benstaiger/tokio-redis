@@ -14,7 +14,7 @@ enum Command {
         key: String,
         val: Bytes,
         resp: Responder<()>,
-    }
+    },
 }
 
 #[tokio::main]
@@ -32,7 +32,7 @@ async fn main() {
                     let res = client.get(&key).await;
                     let _ = resp.send(res);
                 }
-                Command::Set {key, val, resp } => {
+                Command::Set { key, val, resp } => {
                     let res = client.set(&key, val).await;
                     let _ = resp.send(res);
                 }
@@ -54,7 +54,7 @@ async fn main() {
 
     let t2 = tokio::spawn(async move {
         let (resp, recv) = oneshot::channel();
-        let cmd = Command::Set { 
+        let cmd = Command::Set {
             key: "foo".to_string(),
             val: "bar".into(),
             resp,
